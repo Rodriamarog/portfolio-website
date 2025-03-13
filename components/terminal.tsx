@@ -74,17 +74,22 @@ export function Terminal({ output, input, setInput, handleCommand, commandHistor
 
       <div className="flex items-center mt-2">
         <span className="text-green-500 mr-2">visitor@portfolio:~$</span>
-        <div className="flex-1 flex">
-          <span className={`w-2 h-5 bg-green-500 mr-1 ${cursorVisible ? "opacity-100" : "opacity-0"}`}></span>
+        <div className="flex-1 relative">
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent outline-none text-green-300 caret-transparent"
+            className="w-full bg-transparent outline-none text-green-300 caret-transparent"
             autoFocus
           />
+          <div 
+            className="absolute top-0 left-0 flex"
+            style={{ transform: `translateX(${input.length * 0.6}em)` }}
+          >
+            <span className={`w-2 h-5 bg-green-500 ${cursorVisible ? "opacity-100" : "opacity-0"}`}></span>
+          </div>
         </div>
       </div>
     </div>

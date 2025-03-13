@@ -95,7 +95,6 @@ Feel free to reach out for collaboration opportunities or just to chat about tec
       "This interactive terminal allows you to explore my portfolio using Unix-like commands.",
       "Type 'help' to see available commands or check the sidebar for quick reference.",
       "",
-      "visitor@portfolio:~$ ",
     ]
     setOutput(welcomeMessage)
   }, [])
@@ -151,7 +150,7 @@ Feel free to reach out for collaboration opportunities or just to chat about tec
         break
 
       case "clear":
-        setOutput(["visitor@portfolio:~$ "])
+        setOutput([])
         return
 
       case "about":
