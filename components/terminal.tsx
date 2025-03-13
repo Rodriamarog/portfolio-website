@@ -74,16 +74,18 @@ export function Terminal({ output, input, setInput, handleCommand, commandHistor
 
       <div className="flex items-center mt-2">
         <span className="text-green-500 mr-2">visitor@portfolio:~$</span>
-        <input
-          ref={inputRef}
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent outline-none text-green-300 caret-transparent"
-          autoFocus
-        />
-        <span className={`w-2 h-5 bg-green-500 ml-1 ${cursorVisible ? "opacity-100" : "opacity-0"}`}></span>
+        <div className="flex-1 flex">
+          <span className={`w-2 h-5 bg-green-500 mr-1 ${cursorVisible ? "opacity-100" : "opacity-0"}`}></span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="flex-1 bg-transparent outline-none text-green-300 caret-transparent"
+            autoFocus
+          />
+        </div>
       </div>
     </div>
   )
