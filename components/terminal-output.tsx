@@ -7,7 +7,7 @@ export function TerminalOutput({ output }: TerminalOutputProps) {
     <div className="whitespace-pre-wrap">
       {output.map((line, index) => {
         // Check if the line is a command (starts with visitor@portfolio)
-        if (line.startsWith("visitor@portfolio")) {
+        if (line.startsWith("rodrigo-amaro@portfolio")) {
           return (
             <div key={index} className="text-green-500">
               {line}

@@ -6,7 +6,7 @@ import { CommandList } from "@/components/command-list"
 import { useTerminal } from "@/hooks/use-terminal"
 
 export default function Home() {
-  const { input, setInput, history, output, handleCommand, commandHistory, historyIndex } = useTerminal()
+  const { input, setInput, output, handleCommand, commandHistory, historyIndex } = useTerminal()
 
   const terminalRef = useRef<HTMLDivElement>(null)
 
@@ -49,7 +49,7 @@ export default function Home() {
       </div>
 
       <div className="w-full md:w-1/4 p-4 bg-gray-900">
-        <CommandList />
+        <CommandList handleCommand={handleCommand} />
       </div>
     </main>
   )

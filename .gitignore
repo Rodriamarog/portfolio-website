@@ -12,30 +12,94 @@
 
 # testing
 /coverage
+/.nyc_output
+/cypress/screenshots
+/cypress/videos
+/playwright-report
+/test-results
 
 # next.js
 /.next/
 /out/
+.next-env.local
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+Thumbs.db
+desktop.ini
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+lerna-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
+.turbo
+
+# deployment
+.netlify
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - JetBrains
+.idea
+*.iml
+*.ipr
+*.iws
+.idea_modules/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# logs
+logs
+*.log
+
+# cache
+.eslintcache
+.stylelintcache
+.cache
+.npm
+.parcel-cache
+
+# optional REPL history
+.node_repl_history
+
+# output of 'npm pack'
+*.tgz
+
+# temporary folders
+tmp/
+temp/
+
+# storybook
+storybook-static/
+
+# sentry
+.sentryclirc
+
+# sitemap
+public/sitemap*.xml
+public/robots.txt

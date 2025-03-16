@@ -115,7 +115,7 @@ Feel free to reach out for collaboration opportunities or just to chat about tec
     }
 
     // Add command to output
-    const newOutput = [...output, `visitor@portfolio:~$ ${cmd}`]
+    const newOutput = [...output, `rodrigo-amaro@portfolio:~$ ${cmd}`]
 
     // Process command
     const command = cmd.trim().toLowerCase()

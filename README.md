@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Terminal Portfolio Website
+
+![Terminal Portfolio Screenshot](/images/terminal-screenshot.png)
+
+## Overview
+
+This is an interactive terminal-style portfolio website built with Next.js and React. It simulates a command-line interface where visitors can explore my background, projects, skills, and contact information using familiar Unix-like commands.
+
+## Features
+
+- **Interactive Terminal Interface**: Type commands or click on them in the sidebar
+- **Command History**: Navigate through previously entered commands using arrow keys
+- **Tab Completion**: Press Tab to autocomplete commands
+- **Mobile Responsive**: Optimized for both desktop and mobile viewing
+- **Clickable Commands**: Non-technical visitors can simply click commands in the sidebar
+- **Syntax Highlighting**: Different colors for commands, output, and links
+
+## Available Commands
+
+- `help` - Show available commands
+- `ls` - List all files
+- `cat [filename]` - Display file contents
+- `clear` - Clear the terminal
+- `about` - Display information about me
+- `projects` - Show my projects
+- `experience` - Show my work experience
+- `skills` - List my technical skills
+- `contact` - Display my contact information
+
+## Technologies Used
+
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icons
+- **Vercel** - Deployment
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 18.17 or later
+- npm, yarn, or pnpm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/terminal-portfolio.git
+   cd terminal-portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## Project Structure
+
+```
+terminal-portfolio/
+├── app/                  # Next.js App Router
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page
+├── components/           # React components
+│   ├── command-list.tsx  # Sidebar command list
+│   ├── terminal.tsx      # Terminal component
+│   └── terminal-output.tsx # Terminal output formatting
+├── hooks/                # Custom React hooks
+│   └── use-terminal.tsx  # Terminal logic and state
+├── lib/                  # Utility functions
+│   └── utils.ts          # Helper utilities
+├── public/               # Static assets
+└── ...config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To customize the content:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Edit the files object in `hooks/use-terminal.tsx` to update the content displayed for each command
+2. Modify the commands array in `components/command-list.tsx` to add or remove available commands
+3. Update the styling in `app/globals.css` to change the appearance
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+The easiest way to deploy this app is using [Vercel](https://vercel.com):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install -g vercel
+vercel
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgments
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Inspired by terminal-based interfaces and retro computing
+- Thanks to the Next.js team for the excellent framework
+- Special thanks to all open-source contributors
+
+---
+
+Created by [Rodrigo Amaro](https://github.com/Rodriamarog)

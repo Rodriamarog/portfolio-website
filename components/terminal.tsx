@@ -73,7 +73,7 @@ export function Terminal({ output, input, setInput, handleCommand, commandHistor
       <TerminalOutput output={output} />
 
       <div className="flex items-center mt-2">
-        <span className="text-green-500 mr-2">visitor@portfolio:~$</span>
+        <span className="text-green-500 mr-2">rodrigo-amaro@portfolio:~$</span>
         <div className="flex-1 relative">
           <input
             ref={inputRef}
