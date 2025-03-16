@@ -1,7 +1,12 @@
 import React from "react"
 
 interface TerminalOutputProps {
-  output: Array<string | { type: 'svg' | 'image', content: string, background?: string, size?: 'large' }>
+  output: Array<string | { 
+    type: 'svg' | 'image', 
+    content: string, 
+    background?: string, 
+    size?: 'medium' | 'large' 
+  }>
 }
 
 export function TerminalOutput({ output }: TerminalOutputProps) {
@@ -55,8 +60,17 @@ export function TerminalOutput({ output }: TerminalOutputProps) {
               <div className={item.background ? 'bg-white p-4 rounded-lg' : ''}>
                 <img 
                   src={item.content} 
-                  className={item.size === 'large' ? 'max-w-[600px] h-auto object-contain' : 'max-w-[300px] h-auto object-contain'}
+                  className={
+                    item.size === 'large' ? 'w-[800px] max-w-full h-auto' :
+                    item.size === 'medium' ? 'w-[500px] max-w-full h-auto' :
+                    'max-w-[300px] h-auto object-contain'
+                  }
                   alt=""
+                  style={
+                    item.size === 'large' ? { minWidth: '600px' } :
+                    item.size === 'medium' ? { minWidth: '400px' } :
+                    {}
+                  }
                 />
               </div>
             </div>

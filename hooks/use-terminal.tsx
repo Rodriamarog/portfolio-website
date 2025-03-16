@@ -13,6 +13,7 @@ type ImageContent = {
   image: {
     type: 'image'
     content: string
+    size?: 'medium' | 'large'
   }
 }
 
@@ -21,12 +22,20 @@ type ProjectContent = {
   image: {
     type: 'image'
     content: string
+    size?: 'medium' | 'large'
   }
   text2: string
+  image3?: {  // New property for book automation image
+    type: 'image'
+    content: string
+    size?: 'medium' | 'large'
+  }
+  text3: string  // Split the current text2 into text2 and text3
   image2: {
     type: 'image'
     content: string
     background: string
+    size?: 'medium' | 'large'
   }
 }
 
@@ -50,11 +59,27 @@ const files: Record<string, string | FileContent> = {
   "about.txt": {
     text: `
 === About Me ===
-I'm Rodrigo Amaro, a developer passionate about Linux and technology in general.
-I enjoy working with various programming languages and technologies, with experience in Python, JavaScript, Go, and C#.
-I'm particularly interested in cybersecurity and cloud computing, always looking to expand my knowledge and skills.
-Currently, I'm studying Computer Science at CETYS Universidad while working as a developer.
-I'm bilingual, fluent in both English and Spanish.
+Hey there! I'm Rodrigo Amaro, a Mexican-American developer with a passion for technology, entrepreneurship, and continuous learning.
+
+When I'm not coding, you might find me:
+• Playing classic strategy games like Command & Conquer Red Alert 2
+• Occasionally diving into a League of Legends match
+• Tinkering with one of my many ThinkPads (I've bought, upgraded, and sold quite a few!)
+• Setting up a new Linux distro (I like Debian and Ubuntu, I mainly try different desktop environments)
+• Building home server networks for fun and practical use
+• Brainstorming an interesting business idea
+• Enjoying authentic Mexican food (nothing beats homemade tacos)
+• Reading about new technologies or business strategies
+
+I share my home with two dogs and a talkative parrot named Paco who occasionally helps "debug" my code with his commentary.
+
+Professionally, I'm drawn to cybersecurity, cloud computing, and AI. I pride myself on seeing projects through from concept to completion, finding efficient solutions to complex problems.
+
+I've always been logic-minded with a natural aptitude for mathematics, which translates well to programming. I'm a quick learner who works well in teams, always ready to lend a hand when colleagues need support.
+
+What drives me is curiosity - I'm constantly exploring new technologies, experimenting with different development environments, and finding creative ways to monetize ideas.
+
+Let's build something amazing together!
 `,
     svg: `<div style="display: flex; gap: 15px; margin: 10px 0;">
       <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" />
@@ -103,7 +128,13 @@ AI Book Generation App
 - Formats and outputs books in EPUB and PDF
 - Written in Python
 - Generates revenue through published books
-
+`,
+    image3: {
+      type: 'image',
+      content: `${imageBaseUrl}book-automation.png`,
+      size: 'medium'
+    },
+    text3: `
 Neurocrow
 - Chatbot application that integrates with business Facebook and Instagram pages
 - Answers customer questions using Large Language Models
@@ -188,9 +219,9 @@ DevOps/Cloud:
   "contact.txt": {
     text: `
 === Contact Information ===
-Email: rodrigo.amaro.dev@gmail.com
-GitHub: https://github.com/rodrigo-amaro
-LinkedIn: https://linkedin.com/in/rodrigo-amaro
+Email: rodriamarog@gmail.com
+GitHub: https://github.com/Rodriamarog
+LinkedIn: https://www.linkedin.com/in/rodrigo-amaro-547133128/
 `,
     svg: `<div style="display: flex; gap: 15px; margin: 10px 0;">
       <!-- Gmail -->
@@ -205,20 +236,26 @@ LinkedIn: https://linkedin.com/in/rodrigo-amaro
 
 export function useTerminal() {
   const [input, setInput] = useState("")
-  const [output, setOutput] = useState<Array<string | { type: 'svg' | 'image', content: string, background?: string }>>([])
+  const [output, setOutput] = useState<Array<string | { 
+    type: 'svg' | 'image', 
+    content: string, 
+    background?: string,
+    size?: 'medium' | 'large'
+  }>>([])
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(0)
 
   // Initialize terminal with welcome message
   useEffect(() => {
     const welcomeMessage = [
-      "=== Welcome to my Terminal Portfolio ===",
+      "=== Rodrigo Amaro's Portfolio ===",
       "",
       "This interactive terminal allows you to explore my portfolio using Unix-like commands.",
       "Type 'help' to see available commands or check the sidebar for quick reference.",
+      "You can also click on the links in the sidebar to navigate to the respective sections.",
       "",
       { 
-        type: 'image', 
+        type: 'image' as 'image',
         content: '/favicon.ico' // Test with favicon which should definitely exist
       }
     ]
@@ -310,13 +347,22 @@ export function useTerminal() {
           newOutput.push(projectsFile.text)
           newOutput.push({ 
             type: 'image', 
-            content: projectsFile.image.content 
+            content: projectsFile.image.content,
+            size: projectsFile.image.size
           })
           newOutput.push(projectsFile.text2)
+          if (projectsFile.image3) {
+            newOutput.push({ 
+              type: 'image', 
+              content: projectsFile.image3.content,
+              size: projectsFile.image3.size
+            })
+          }
+          newOutput.push(projectsFile.text3)
           newOutput.push({ 
             type: 'image', 
             content: projectsFile.image2.content, 
-            background: projectsFile.image2.background 
+            background: projectsFile.image2.background
           })
         }
         newOutput.push("")
