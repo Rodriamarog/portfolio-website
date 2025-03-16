@@ -1,68 +1,64 @@
+import React from "react"
+
 interface TerminalOutputProps {
-  output: string[]
+  output: Array<string | { type: 'svg' | 'image', content: string, background?: string, size?: 'large' }>
 }
 
 export function TerminalOutput({ output }: TerminalOutputProps) {
   return (
-    <div className="whitespace-pre-wrap">
-      {output.map((line, index) => {
-        // Check if the line is a command (starts with visitor@portfolio)
-        if (line.startsWith("rodrigo-amaro@portfolio")) {
-          return (
-            <div key={index} className="text-green-500">
-              {line}
-            </div>
-          )
-        }
+    <div className="text-green-400 font-mono whitespace-pre-wrap">
+      {output.map((item, index) => {
+        if (typeof item === 'string') {
+          // Process URLs in text
+          if (item.includes('http')) {
+            const parts = item.split(/(https?:\/\/[^\s]+)/g)
+            return (
+              <div key={index} className="mb-1">
+                {parts.map((part, i) => {
+                  if (part.match(/^https?:\/\//)) {
+                    return (
+                      <a
+                        key={i}
+                        href={part}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:underline"
+                      >
+                        {part}
+                      </a>
+                    )
+                  }
+                  return <span key={i}>{part}</span>
+                })}
+              </div>
+            )
+          }
 
-        // Check if the line is a header (surrounded by === or ---)
-        else if (line.startsWith("===") || line.startsWith("---")) {
-          return (
-            <div key={index} className="text-yellow-400 font-bold">
-              {line}
-            </div>
-          )
-        }
+          // Highlight command prompt
+          if (item.startsWith('rodrigo-amaro@portfolio:~$')) {
+            const parts = item.split('$')
+            return (
+              <div key={index} className="mb-1">
+                <span className="text-green-400">{parts[0]}$</span>
+                <span className="text-yellow-300">{parts[1]}</span>
+              </div>
+            )
+          }
 
-        // Check if the line is an error message
-        else if (line.includes("not found") || line.includes("error")) {
+          // Regular text line
+          return <div key={index}>{item}</div>
+        } else if (item.type === 'svg') {
+          return <div key={index} dangerouslySetInnerHTML={{ __html: item.content }} />
+        } else if (item.type === 'image') {
           return (
-            <div key={index} className="text-red-500">
-              {line}
-            </div>
-          )
-        }
-
-        // Check if the line contains a link
-        else if (line.includes("http://") || line.includes("https://")) {
-          const parts = line.split(/(https?:\/\/[^\s]+)/)
-          return (
-            <div key={index} className="text-green-300">
-              {parts.map((part, i) => {
-                if (part.startsWith("http")) {
-                  return (
-                    <a
-                      key={i}
-                      href={part}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 underline"
-                    >
-                      {part}
-                    </a>
-                  )
-                }
-                return part
-              })}
-            </div>
-          )
-        }
-
-        // Default styling for normal text
-        else {
-          return (
-            <div key={index} className="text-green-300">
-              {line}
+            <div key={index} className="flex justify-center my-4">
+              <div className={item.background ? 'bg-white p-4 rounded-lg' : ''}>
+                <img 
+                  src={item.content} 
+                  className={item.size === 'large' ? 'max-w-[600px] h-auto object-contain' : 'max-w-[300px] h-auto object-contain'}
+                  alt=""
+                />
+              </div>
             </div>
           )
         }

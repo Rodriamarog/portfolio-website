@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect, useRef, type KeyboardEvent } from "react"
+import React, { useState, useEffect, useRef, type KeyboardEvent } from "react"
 import { TerminalOutput } from "@/components/terminal-output"
 
 interface TerminalProps {
-  output: string[]
+  output: Array<string | { type: 'svg' | 'image', content: string, background?: string }>
   input: string
   setInput: (input: string) => void
   handleCommand: (command: string) => void
@@ -12,7 +12,14 @@ interface TerminalProps {
   historyIndex: number
 }
 
-export function Terminal({ output, input, setInput, handleCommand, commandHistory, historyIndex }: TerminalProps) {
+export function Terminal({
+  output,
+  input,
+  setInput,
+  handleCommand,
+  commandHistory,
+  historyIndex,
+}: TerminalProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [cursorVisible, setCursorVisible] = useState(true)
 
@@ -68,8 +75,14 @@ export function Terminal({ output, input, setInput, handleCommand, commandHistor
     }
   }
 
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
   return (
-    <div className="h-full">
+    <div className="h-full" onClick={focusInput}>
       <TerminalOutput output={output} />
 
       <div className="flex items-center mt-2">
