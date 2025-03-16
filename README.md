@@ -1,6 +1,6 @@
 # Terminal Portfolio Website
 
-![Terminal Portfolio Screenshot](/images/terminal-screenshot.png)
+![Terminal Portfolio Screenshot](./public/images/terminal-screenshot.png)
 
 ## Overview
 
