@@ -121,11 +121,34 @@
 }
 
 html, body {
-  overflow: hidden;
   height: 100%;
 }
 
-#root, main {
-  height: 100vh;
-  overflow: hidden;
+/* Desktop: Fixed, non-scrollable */
+@media (min-width: 768px) {
+  html, body {
+    overflow: hidden;
+  }
+  
+  #root, main {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+/* Mobile: Scrollable */
+@media (max-width: 767px) {
+  html, body {
+    overflow-y: auto;
+  }
+  
+  #root, main {
+    min-height: 100vh;
+  }
+  
+  /* Make the terminal area scrollable on mobile */
+  .terminal-container {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
 }

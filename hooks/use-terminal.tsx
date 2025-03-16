@@ -8,84 +8,92 @@ export function useTerminal() {
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(0)
 
-  // Files/content for the terminal
-  const files = {
-    "about.txt": `
+// Files/content for the terminal
+const files = {
+  "about.txt": `
 === About Me ===
-I'm a passionate developer who loves Linux and terminal-based applications.
-My journey in software development started with a fascination for how computers work at a fundamental level.
-I enjoy building efficient, elegant solutions to complex problems and continuously learning new technologies.
-
-When I'm not coding, you can find me contributing to open-source projects, experimenting with Linux distributions,
-or customizing my development environment to perfection.
-    `,
-    "experience.txt": `
+I'm Rodrigo Amaro, a developer passionate about Linux and technology in general.
+I enjoy working with various programming languages and technologies, with experience in Python, JavaScript, Go, and C#.
+I'm particularly interested in cybersecurity and cloud computing, always looking to expand my knowledge and skills.
+Currently, I'm studying Computer Science at CETYS Universidad while working as a developer.
+I'm bilingual, fluent in both English and Spanish.
+  `,
+  "experience.txt": `
 === Work Experience ===
-
-Senior Software Developer | TechCorp Inc. | 2021 - Present
-- Led development of cloud-native applications using modern JavaScript frameworks
-- Implemented CI/CD pipelines that reduced deployment time by 40%
-- Mentored junior developers and conducted code reviews
-
-Software Developer | Innovate Solutions | 2018 - 2021
-- Developed and maintained RESTful APIs for client applications
-- Optimized database queries resulting in 30% performance improvement
-- Collaborated with cross-functional teams to deliver features on schedule
-    `,
-    "projects.txt": `
+Full Stack Developer | Vanguardia Tecnologias | 2024 - Present
+- Led the development of enterprise-level Blazor WebAssembly applications, reducing client response times by 35%
+- Designed and optimized complex database schemas across multiple platforms (MSSQL, PostgreSQL, MySQL)
+- Implemented secure authentication systems and role-based access control for sensitive client applications
+- Developed RESTful APIs that handle over 10,000 daily requests with 99.9% uptime
+- Created and maintained comprehensive CI/CD pipelines using GitHub Actions, improving deployment efficiency by 40%
+- Collaborated with UX/UI designers to implement responsive, accessible interfaces that increased user engagement by 28%
+- Performed code reviews and mentored junior developers, resulting in 20% fewer bugs in production
+- Integrated third-party services and APIs to extend application functionality while maintaining security best practices
+  `,
+  "projects.txt": `
 === Projects ===
+Tijuana Border Crossing Wait Times
+- Automated Facebook page that posts current wait times for Tijuana-San Diego border crossings
+- Built with Python, hosted on AWS Lambda
+- Triggered by EventBridge every 15 minutes
+- Has active user base with daily interactions
+- View the live page: https://www.facebook.com/profile.php?id=61556651472875
 
-Terminal Portfolio Website
-- Interactive command-line interface portfolio
-- Built with Next.js and Tailwind CSS
-- Features custom terminal emulation
+AI Book Generation App
+- End-to-end solution for book creation from title input
+- Generates chapter titles, content, metadata, and cover images using AI
+- Formats and outputs books in EPUB and PDF
+- Written in Python
+- Generates revenue through published books
 
-Linux System Monitor
-- Real-time system resource monitoring tool
-- Written in Rust for maximum performance
-- Open source: https://github.com/username/system-monitor
-
-Markdown Note Taking App
-- Minimalist note-taking application with Markdown support
-- Electron-based for cross-platform compatibility
-- Features cloud sync and version history
-    `,
-    "skills.txt": `
+Neurocrow
+- Chatbot application that integrates with business Facebook and Instagram pages
+- Answers customer questions using Large Language Models
+- Features middleware written in Go hosted on Render
+- Implements routing to direct different pages to appropriate chatbots
+- Utilizes CI/CD pipelines for both middleware and website
+- Visit the website: https://neurocrow.com/
+  `,
+  "skills.txt": `
 === Technical Skills ===
-
 Languages:
-- JavaScript/TypeScript
 - Python
-- Rust
+- JavaScript
+- Go
+- C#
 - Bash scripting
 
-Frontend:
-- React/Next.js
-- Tailwind CSS
-- HTML/CSS
-
-Backend:
-- Node.js
-- Express
+Databases:
+- MySQL
 - PostgreSQL
-- Docker
+- MariaDB
+- MSSQL
+- Supabase
+- Firebase
 
-DevOps:
+Frontend/Backend:
+- Blazor (C#)
+- Various web frameworks
+
+DevOps/Cloud:
+- Docker (Windows and Linux containers)
+- CI/CD implementation
+- Railway
+- Render
+- Vercel
+- AWS (Lambda, EventBridge)
+- Google Cloud Platform (GCP)
 - Linux administration
-- CI/CD (GitHub Actions, Jenkins)
-- AWS/Cloud infrastructure
-    `,
-    "contact.txt": `
+  `,
+  "contact.txt": `
 === Contact Information ===
-
-Email: developer@example.com
-GitHub: https://github.com/username
-LinkedIn: https://linkedin.com/in/username
-Twitter: @devusername
+Email: rodriamarog@gmail.com
+GitHub: https://github.com/Rodriamarog
+LinkedIn: https://www.linkedin.com/in/rodrigo-amaro-547133128/
 
 Feel free to reach out for collaboration opportunities or just to chat about technology!
-    `,
-  }
+  `,
+};
 
   // Initialize terminal with welcome message
   useEffect(() => {

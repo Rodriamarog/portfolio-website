@@ -35,7 +35,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div ref={terminalRef} className="flex-1 bg-gray-950 p-4 overflow-auto rounded-b-lg">
+          <div ref={terminalRef} className="flex-1 bg-gray-950 p-4 overflow-auto rounded-b-lg terminal-container">
             <Terminal
               output={output}
               input={input}
