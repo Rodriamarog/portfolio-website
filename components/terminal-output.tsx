@@ -2,10 +2,11 @@ import React from "react"
 
 interface TerminalOutputProps {
   output: Array<string | { 
-    type: 'svg' | 'image', 
+    type: 'svg' | 'image' | 'video',
     content: string, 
     background?: string, 
-    size?: 'medium' | 'large' 
+    size?: 'medium' | 'large',
+    speed?: number
   }>
 }
 
@@ -75,6 +76,46 @@ export function TerminalOutput({ output }: TerminalOutputProps) {
               </div>
             </div>
           )
+        } else if (item.type === 'video') {
+          // Handle YouTube video embedding
+          const videoId = item.content;
+          const speed = item.speed || 1;
+          
+          return (
+            <div key={index} className="flex justify-center my-6 w-full">
+              <div className="w-full max-w-3xl">
+                <iframe 
+                  width="100%" 
+                  height="400"
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&playbackRate=${speed}`}
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                  className="rounded-lg"
+                  style={{ 
+                    pointerEvents: 'none' // Prevents interaction with the video
+                  }}
+                  onLoad={(e) => {
+                    // Set playback rate after iframe loads
+                    const iframe = e.target as HTMLIFrameElement;
+                    if (iframe.contentWindow) {
+                      setTimeout(() => {
+                        iframe.contentWindow?.postMessage(
+                          JSON.stringify({
+                            event: 'command',
+                            func: 'setPlaybackRate',
+                            args: [speed]
+                          }), 
+                          '*'
+                        );
+                      }, 1000);
+                    }
+                  }}
+                ></iframe>
+              </div>
+            </div>
+          );
         }
       })}
     </div>

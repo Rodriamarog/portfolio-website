@@ -5,6 +5,8 @@ import { useState, useEffect } from "react"
 // Define types for different file contents
 type SVGContent = {
   text: string
+  video?: string
+  text2?: string
   svg: string
 }
 
@@ -69,7 +71,9 @@ When I'm not coding, you might find me:
 • Building home server networks for fun and practical use
 • Brainstorming an interesting business idea
 • Enjoying authentic Mexican food (nothing beats homemade tacos)
-• Reading about new technologies or business strategies
+• Reading about new technologies or business strategies`,
+    video: "ZgNGrMrR-rs",
+    text2: `
 
 I share my home with two dogs and a talkative parrot named Paco who occasionally helps "debug" my code with his commentary.
 
@@ -79,8 +83,7 @@ I've always been logic-minded with a natural aptitude for mathematics, which tra
 
 What drives me is curiosity - I'm constantly exploring new technologies, experimenting with different development environments, and finding creative ways to monetize ideas.
 
-Let's build something amazing together!
-`,
+Let's build something amazing together!`,
     svg: `<div style="display: flex; gap: 15px; margin: 10px 0;">
       <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" />
       <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" />
@@ -237,10 +240,11 @@ LinkedIn: https://www.linkedin.com/in/rodrigo-amaro-547133128/
 export function useTerminal() {
   const [input, setInput] = useState("")
   const [output, setOutput] = useState<Array<string | { 
-    type: 'svg' | 'image', 
+    type: 'svg' | 'image' | 'video',
     content: string, 
     background?: string,
-    size?: 'medium' | 'large'
+    size?: 'medium' | 'large',
+    speed?: number
   }>>([])
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(0)
@@ -335,6 +339,16 @@ export function useTerminal() {
         if (typeof files["about.txt"] === 'object') {
           const aboutFile = files["about.txt"] as any
           newOutput.push(aboutFile.text)
+          if (aboutFile.video) {
+            newOutput.push({ 
+              type: 'video', 
+              content: aboutFile.video,
+              speed: 1.25 // Set playback speed to 1.25x
+            })
+          }
+          if (aboutFile.text2) {
+            newOutput.push(aboutFile.text2)
+          }
           newOutput.push({ type: 'svg', content: aboutFile.svg })
         }
         newOutput.push("")
