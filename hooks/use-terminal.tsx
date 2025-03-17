@@ -319,7 +319,7 @@ export function useTerminal() {
               if ('text' in fileContent) newOutput.push(fileContent.text)
               if ('svg' in fileContent) newOutput.push({ type: 'svg', content: fileContent.svg })
               if ('image' in fileContent) newOutput.push({ type: 'image', content: fileContent.image.content })
-              if ('text2' in fileContent) newOutput.push(fileContent.text2)
+              if ('text2' in fileContent && fileContent.text2) newOutput.push(fileContent.text2)
               if ('image2' in fileContent) newOutput.push({ type: 'image', content: fileContent.image2.content, background: fileContent.image2.background })
             }
             

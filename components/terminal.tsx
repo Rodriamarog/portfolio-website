@@ -4,7 +4,13 @@ import React, { useState, useEffect, useRef, type KeyboardEvent } from "react"
 import { TerminalOutput } from "@/components/terminal-output"
 
 interface TerminalProps {
-  output: Array<string | { type: 'svg' | 'image', content: string, background?: string }>
+  output: Array<string | { 
+    type: 'svg' | 'image' | 'video',
+    content: string,
+    background?: string,
+    size?: 'medium' | 'large',
+    speed?: number
+  }>
   input: string
   setInput: (input: string) => void
   handleCommand: (command: string) => void
@@ -55,12 +61,14 @@ export function Terminal({
     } else if (e.key === "ArrowUp") {
       e.preventDefault()
       if (commandHistory.length > 0 && historyIndex < commandHistory.length) {
-        setInput(commandHistory[commandHistory.length - 1 - historyIndex])
+        const newIndex = historyIndex + 1
+        setInput(commandHistory[commandHistory.length - newIndex])
       }
     } else if (e.key === "ArrowDown") {
       e.preventDefault()
-      if (historyIndex > 0) {
-        setInput(commandHistory[commandHistory.length - historyIndex])
+      if (historyIndex > 1) {
+        const newIndex = historyIndex - 1
+        setInput(commandHistory[commandHistory.length - newIndex])
       } else {
         setInput("")
       }
